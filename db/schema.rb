@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160217141602) do
+ActiveRecord::Schema.define(version: 20160306133317) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -124,6 +124,31 @@ ActiveRecord::Schema.define(version: 20160217141602) do
     t.integer  "round",                    default: 1
   end
 
+  create_table "events", force: :cascade do |t|
+    t.string   "name"
+    t.date     "start_date"
+    t.date     "end_date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "job_offers", force: :cascade do |t|
+    t.string   "title"
+    t.text     "description"
+    t.string   "url"
+    t.string   "company_name"
+    t.string   "contact_name"
+    t.string   "contact_email"
+    t.string   "contact_phone"
+    t.string   "location"
+    t.string   "duration"
+    t.boolean  "paid"
+    t.boolean  "rgsoc_only"
+    t.text     "misc_info"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "mailings", force: :cascade do |t|
     t.string   "from",       limit: 255
     t.string   "to",         limit: 255
@@ -183,8 +208,9 @@ ActiveRecord::Schema.define(version: 20160217141602) do
     t.integer  "team_id"
     t.integer  "user_id"
     t.string   "name",       limit: 255
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.datetime "created_at",                                 null: false
+    t.datetime "updated_at",                                 null: false
+    t.text     "state",                  default: "pending", null: false
   end
 
   create_table "seasons", force: :cascade do |t|
